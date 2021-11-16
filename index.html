@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RestCountry</title>
+</head>
+<body>
+    <script>
+        var board=document.createElement('div');
+        
+        board.style.width="1300px";
+        board.style.display="flex";
+        board.style.flexDirection="row";
+        board.style.flexWrap="wrap";
+        
+
+        fetch("https://restcountries.com/v3.1/all")
+        
+        .then(function(data){
+            return data.json();
+        })
+        .then(function(dataObj){
+            console.log(dataObj);
+        
+
+        for(let i=0; i<dataObj.length; i++){
+            
+            var box=document.createElement('div');
+            box.style.height="270px";
+            box.style.width="230px";
+            box.style.marginRight="10px";
+            box.style.marginBottom="20px";
+            box.style.marginLeft="15px";
+            box.style.align="center";
+            box.style.borderRadius="0.25em";
+            box.style.backgroundColor="#DEDEDE";
+            box.style.border="1px solid gray";
+            
+            
+            board.appendChild(box);
+            document.body.appendChild(board);
+
+            var myImg=document.createElement('img');
+            myImg.setAttribute("src", dataObj[i].flags.png);
+            myImg.style.width="230px";
+            myImg.style.height="120px";
+            myImg.style.border="1px solid gray";
+            myImg.style.position="absolute";
+            box.appendChild(myImg);
+
+           var myDetail1=document.createElement('detail1');
+            myDetail1.style.width="200px"
+            myDetail1.innerText=dataObj[i].name.common;
+            myDetail1.style.position="absolute";
+            myDetail1.style.marginTop="140px";
+            box.appendChild(myDetail1);
+
+            var myDetail2=document.createElement('detail2');
+            myDetail2.innerText=dataObj[i].altSpellings[0];
+            myDetail2.style.width="250px";
+            myDetail2.style.position="absolute";
+            myDetail2.style.marginTop="180px";
+            box.appendChild(myDetail2);
+
+            
+            
+        }
+    }) 
+        
+    
+    </script>
+</body>
+</html>
